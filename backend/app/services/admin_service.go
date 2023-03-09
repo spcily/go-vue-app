@@ -2,7 +2,7 @@ package services
 
 import (
 	"errors"
-	"go-vue-app/backend/app/models"
+	"go-vue-app/backend/pkg/models"
 	"log"
 )
 
