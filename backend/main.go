@@ -1,8 +1,8 @@
 package main
 
 import (
+	"go-vue-app/backend/app/models"
 	"go-vue-app/backend/app/services"
-	"go-vue-app/backend/pkg/models"
 	"go-vue-app/backend/pkg/utils"
 
 	"github.com/gofiber/fiber/v2"
