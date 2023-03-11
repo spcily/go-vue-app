@@ -1,13 +1,22 @@
 package utils
 
-import "golang.org/x/crypto/bcrypt"
+import (
+	"errors"
+
+	"golang.org/x/crypto/bcrypt"
+)
+
+var ErrPasswordValidation = errors.New("password validation failed")
 
 func HashPassword(password string) (string, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	return string(bytes), err
 }
 
-func ValidatePassword(passwordHash string, password string) bool {
+func ValidatePassword(passwordHash string, password string) error {
 	err := bcrypt.CompareHashAndPassword([]byte(passwordHash), []byte(password))
-	return err == nil
+	if err != nil {
+		return ErrPasswordValidation
+	}
+	return nil
 }

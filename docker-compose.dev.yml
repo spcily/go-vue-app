@@ -1,0 +1,28 @@
+version: "3.3"
+
+services:
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: govueapp
+    ports:
+      - "3307:3306"
+    volumes:
+      - govueapp-db:/var/lib/mysql
+
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --save 20 1 --loglevel warning --requirepass 123456
+    volumes:
+      - govueapp-redis:/data
+
+volumes:
+  govueapp-db:
+  govueapp-redis:
