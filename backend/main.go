@@ -3,6 +3,7 @@ package main
 import (
 	"go-vue-app/backend/internal/database"
 	"go-vue-app/backend/pkg/routers"
+	"go-vue-app/backend/pkg/seeds"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -15,6 +16,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error connecting to database: %s", err)
 	}
+
+	database.AutoMigrate(db)
+	seeds.Up(db)
 
 	app := fiber.New()
 	routers.RegisterRoutes(db, app)

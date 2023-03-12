@@ -1,7 +1,6 @@
 package repositories
 
 import (
-	"go-vue-app/backend/internal/utils"
 	"go-vue-app/backend/pkg/models"
 
 	"gorm.io/gorm"
@@ -17,14 +16,8 @@ func NewAdminRepository(db *gorm.DB) *AdminRepository {
 
 func (repo *AdminRepository) FindByUsername(username string) (*models.Admin, error) {
 	var admin models.Admin
-	// mock api until we have a database
-	hash, _ := utils.HashPassword("123456")
-	admin.Username = username
-	admin.Password = hash
 
-	return &admin, nil
+	err := repo.db.Where("username = ?", username).First(&admin).Error
 
-	// err := repo.db.Where("username = ?", username).First(&admin).Error
-
-	// return &admin, err
+	return &admin, err
 }

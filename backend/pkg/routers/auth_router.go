@@ -13,6 +13,8 @@ type LoginDto struct {
 }
 
 func RegisterAuthRoutes(app fiber.Router, adminService *services.AdminService) {
+	authController := controllers.NewAuthController(adminService)
+
 	v1Auth := app.Group("/auth")
-	v1Auth.Post("/login", controllers.LoginController(adminService))
+	v1Auth.Post("/login", authController.Login)
 }

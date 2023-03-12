@@ -20,10 +20,14 @@ func (service *AdminService) Login(username string, password string) (*models.Ad
 		return nil, err
 	}
 
+	if admin.Password == "" {
+		return admin, nil
+	}
+
 	err = utils.ValidatePassword(admin.Password, password)
 	if err != nil {
 		return nil, err
 	}
 
-	return admin, err
+	return admin, nil
 }

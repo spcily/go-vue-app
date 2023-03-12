@@ -2,7 +2,11 @@
 
 # todos
 
-- [ ] db migration & seedings
-- [ ] repo using data from database
+- [x] db migration & seedings
+- [x] repo using data from database
 - [ ] request body/ params validation
 - [ ] ...
+
+# development
+
+- [air](https://github.com/cosmtrek/air) for hot reload
