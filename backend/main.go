@@ -18,7 +18,7 @@ func main() {
 		log.Fatalf("Error connecting to database: %s", err)
 	}
 
-	if os.Getenv("ENABLED_MIGRATIONS") == "1" {
+	if os.Getenv("ENABLE_MIGRATION") == "1" {
 		database.AutoMigrate(db)
 		seeds.Up(db)
 	}

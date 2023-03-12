@@ -11,7 +11,7 @@ type Admin struct {
 	IsActive *bool  `gorm:"type:tinyint(1);default:1;uniqueIndex:idx_admin_username"`
 }
 
-func (admin *Admin) BeforeDelete(tx *gorm.DB) (err error) {
-	admin.IsActive = nil
-	return
+func (admin *Admin) BeforeDelete(tx *gorm.DB) error {
+	tx.Model(&Admin{}).Where("id = ?", admin.ID).Update("is_active", nil)
+	return nil
 }
