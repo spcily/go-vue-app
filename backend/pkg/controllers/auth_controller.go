@@ -22,6 +22,12 @@ type LoginDto struct {
 	Password string `json:"password"`
 }
 
+type LoginResponse struct {
+	ID       uint   `json:"id"`
+	Username string `json:"username"`
+	Token    string `json:"token"`
+}
+
 func (authController *AuthController) Login(c *fiber.Ctx) error {
 	var loginDto LoginDto
 	if err := c.BodyParser(&loginDto); err != nil {
@@ -36,5 +42,10 @@ func (authController *AuthController) Login(c *fiber.Ctx) error {
 		return response.ErrorResponse(c, 400, -1, "login failed", nil)
 	}
 
-	return response.SuccessResponse(c, "login success", admin)
+	var loginResponse LoginResponse
+	loginResponse.ID = admin.ID
+	loginResponse.Username = admin.Username
+	loginResponse.Token = "test"
+
+	return response.SuccessResponse(c, "login success", loginResponse)
 }

@@ -6,6 +6,7 @@
 - [x] repo using data from database
 - [ ] request body/ params validation
 - [ ] jwt auth 
+- [ ] localization for response message
 
 # development
 
