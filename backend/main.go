@@ -5,6 +5,7 @@ import (
 	"go-vue-app/backend/pkg/routers"
 	"go-vue-app/backend/pkg/seeds"
 	"log"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
@@ -17,8 +18,10 @@ func main() {
 		log.Fatalf("Error connecting to database: %s", err)
 	}
 
-	database.AutoMigrate(db)
-	seeds.Up(db)
+	if os.Getenv("ENABLED_MIGRATIONS") == "1" {
+		database.AutoMigrate(db)
+		seeds.Up(db)
+	}
 
 	app := fiber.New()
 	routers.RegisterRoutes(db, app)
